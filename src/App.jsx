@@ -6,19 +6,30 @@ export default function App() {
     { name: "Lobster Bisque", price: 80 },
     { name: "Evian Water", price: 25 }
   ];
-  const total = items.reduce((sum, i) => sum + i.price, 0);
+  const subtotal = items.reduce((sum, item) => sum + item.price, 0);
+  const tax = subtotal * 0.14;
+  const service = subtotal * 0.12;
+  const total = subtotal + tax + service;
 
   return (
-    <div style={{ fontFamily: "Georgia, serif", background: "#f3f2ed", minHeight: "100vh", padding: "2rem" }}>
+    <div style={{
+      fontFamily: "Inter, system-ui, sans-serif",
+      background: "linear-gradient(to right, #ece9e6, #ffffff)",
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "2rem"
+    }}>
       <div style={{
-        background: "#fff",
-        maxWidth: "500px",
-        margin: "0 auto",
-        borderRadius: "10px",
-        boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-        padding: "2rem"
+        backgroundColor: "#fff",
+        padding: "2.5rem",
+        borderRadius: "12px",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+        width: "100%",
+        maxWidth: "600px"
       }}>
-        <h1 style={{ textAlign: "center", fontSize: "2rem", marginBottom: "1rem", color: "#333" }}>
+        <h1 style={{ textAlign: "center", marginBottom: "1.5rem", fontSize: "2rem", color: "#333" }}>
           Table 12 – Receipt
         </h1>
         <ul style={{ listStyle: "none", padding: 0 }}>
@@ -30,8 +41,23 @@ export default function App() {
           ))}
         </ul>
         <hr style={{ margin: "1rem 0" }} />
-        <h2 style={{ textAlign: "right" }}>Total: SAR {total.toFixed(2)}</h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", marginTop: "1rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span>Subtotal</span>
+          <span>SAR {subtotal.toFixed(2)}</span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span>Tax (14%)</span>
+          <span>SAR {tax.toFixed(2)}</span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span>Service Charge (12%)</span>
+          <span>SAR {service.toFixed(2)}</span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", fontWeight: "bold", marginTop: "1rem", fontSize: "1.2rem" }}>
+          <span>Total</span>
+          <span>SAR {total.toFixed(2)}</span>
+        </div>
+        <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
           <button style={btn}>Pay Full</button>
           <button style={btn}>Split Bill</button>
           <button style={btn}>Select Items</button>
@@ -43,10 +69,10 @@ export default function App() {
 
 const btn = {
   padding: "0.75rem",
-  background: "#333",
+  background: "#007BFF",
   color: "#fff",
   border: "none",
-  borderRadius: "5px",
+  borderRadius: "6px",
   fontSize: "1rem",
   cursor: "pointer"
 };
