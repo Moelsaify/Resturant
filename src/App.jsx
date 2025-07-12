@@ -1,43 +1,53 @@
+import React from "react";
+
 export default function App() {
-  const receipt = {
-    table: 12,
-    items: [
-      { name: "Wagyu Steak", price: 250 },
-      { name: "Truffle Pasta", price: 150 },
-      { name: "Evian Water", price: 25 }
-    ]
-  };
-  const total = receipt.items.reduce((sum, item) => sum + item.price, 0);
+  const items = [
+    { name: "Filet Mignon", price: 190 },
+    { name: "Lobster Bisque", price: 80 },
+    { name: "Evian Water", price: 25 }
+  ];
+  const total = items.reduce((sum, i) => sum + i.price, 0);
 
   return (
-    <div className="min-h-screen bg-navy text-champagne font-serif p-6">
-      <div className="max-w-md mx-auto border-2 border-champagne rounded-2xl p-6 shadow-xl">
-        <h1 className="text-3xl mb-2 text-center">Table {receipt.table}</h1>
-        <h2 className="text-2xl mb-4 text-center">Your Dinner</h2>
-        <ul className="mb-4 space-y-2">
-          {receipt.items.map((item, i) => (
-            <li key={i} className="flex justify-between text-lg">
+    <div style={{ fontFamily: "Georgia, serif", background: "#f3f2ed", minHeight: "100vh", padding: "2rem" }}>
+      <div style={{
+        background: "#fff",
+        maxWidth: "500px",
+        margin: "0 auto",
+        borderRadius: "10px",
+        boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+        padding: "2rem"
+      }}>
+        <h1 style={{ textAlign: "center", fontSize: "2rem", marginBottom: "1rem", color: "#333" }}>
+          Table 12 – Receipt
+        </h1>
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {items.map((item, idx) => (
+            <li key={idx} style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
               <span>{item.name}</span>
               <span>SAR {item.price.toFixed(2)}</span>
             </li>
           ))}
         </ul>
-        <div className="border-t border-champagne pt-3 mb-4 text-right text-xl">
-          <strong>Total: SAR {total.toFixed(2)}</strong>
-        </div>
-        <div className="grid grid-cols-1 gap-3">
-          <button className="bg-champagne text-navy rounded-lg py-2 font-semibold hover:bg-opacity-90">
-            Pay Full Bill
-          </button>
-          <button className="bg-champagne text-navy rounded-lg py-2 font-semibold hover:bg-opacity-90">
-            Split Bill
-          </button>
-          <button className="bg-champagne text-navy rounded-lg py-2 font-semibold hover:bg-opacity-90">
-            Pay Selected Items
-          </button>
+        <hr style={{ margin: "1rem 0" }} />
+        <h2 style={{ textAlign: "right" }}>Total: SAR {total.toFixed(2)}</h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", marginTop: "1rem" }}>
+          <button style={btn}>Pay Full</button>
+          <button style={btn}>Split Bill</button>
+          <button style={btn}>Select Items</button>
         </div>
       </div>
     </div>
   );
 }
+
+const btn = {
+  padding: "0.75rem",
+  background: "#333",
+  color: "#fff",
+  border: "none",
+  borderRadius: "5px",
+  fontSize: "1rem",
+  cursor: "pointer"
+};
 
